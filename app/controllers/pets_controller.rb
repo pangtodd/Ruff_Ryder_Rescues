@@ -17,8 +17,8 @@ class PetsController < ApplicationController
 
   def update
     @pet = Pet.find(params[:id])
-    if @pet.update(pet_params)
-      redner status: 200, json: {
+    if @pet.update!(pet_params)
+      render status: 200, json: {
         message: "this pet entry has been updated."
       }
     end
