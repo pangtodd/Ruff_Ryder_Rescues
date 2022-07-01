@@ -18,6 +18,8 @@ describe "get all pets route", :type => :request do
     get "/pets/#{@id}"
     expect(response).to have_http_status(:success)
     # expect(JSON.parse(response.body).size).to eq(2)
+    # this= 8, all attributes of the JSON (although it is 1 JSON object, which is correct.)
+
   end
 
 end
