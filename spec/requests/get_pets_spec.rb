@@ -12,4 +12,12 @@ describe "get all pets route", :type => :request do
   it 'returns status code 200' do
     expect(response).to have_http_status(:success)
   end
+
+  it 'can return a single pet by id' do
+    @id = JSON.parse(response.body).first["id"]
+    get "/pets/#{@id}"
+    expect(response).to have_http_status(:success)
+    # expect(JSON.parse(response.body).size).to eq(2)
+  end
+
 end
