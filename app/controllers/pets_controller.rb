@@ -45,6 +45,21 @@ class PetsController < ApplicationController
     end
   end
 
+  # couldn't quite get this to work out.
+  # def search
+  #   if params[:name]
+  #     name = params[:name]
+  #     @pets = Pet.name_search(name)
+  #   elsif params[:animal_type]
+  #     type = params[:animal_type]
+  #     @pets = Pet.type_search(type)
+  #   else
+  #     @pets = Pet.all
+  #   end
+  #   json_response(@pets)
+  # end
+
+
   private
   def json_response(object, status = :ok)
     render json: object, status: status
