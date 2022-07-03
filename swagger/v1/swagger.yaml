@@ -1,0 +1,82 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/pets":
+    get:
+      summary: list pets
+      parameters: []
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create pet
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                animal_type:
+                  type: string
+              required:
+              - name
+              - animal_type
+  "/pets/random":
+    get:
+      summary: list a random pet from the database
+      parameters: []
+      responses:
+        '200':
+          description: successful
+  "/pets/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show pet
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update pet
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                animal_type:
+                  type: string
+              required:
+              - id
+              - name
+              - animal_type
+    delete:
+      summary: delete pet
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000/
