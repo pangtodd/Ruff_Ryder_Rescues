@@ -1,9 +1,15 @@
 class PetsController < ApplicationController
 
   def index
-    @pets = Pet.all
-    # name = params[:name]
-    # @pets = Pet.search(name)
+    if params[:name]
+      name = params[:name]
+      @pets = Pet.name_search(name)
+    elsif params[:animal_type]
+      type = params[:animal_type]
+      @pets = Pet.type_search(type)
+    else
+      @pets = Pet.all
+    end
     json_response(@pets)
   end
 
