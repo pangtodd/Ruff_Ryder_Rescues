@@ -38,7 +38,6 @@ Using Ruby on Rails and Postgres, this is an API for rescue animals who need to 
 * Type "rake db:seed" if you'd like the database populated with dummy/test info. This is not necessary for testing.
 * Type "rails s" into your terminal. This should launch Rails.
 * Please note, this application was built with a Mac system. You may need to make adjustments (such as creating adding/hiding your Postgres password, or using slightly different commands to launch Postgres) if using a PC.
-* In a browswer, type in "localhost:3000". You should be able to navigate like a normal website.
 * In your terminal, type in "rspec" to run established tests and make sure everything is still working as expected (all tests should pass.)
 * You can test routes by either using Postman or CURL in your terminal. See section below for API endpoints you can test.
 ### Swagger setup
