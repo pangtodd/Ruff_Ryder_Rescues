@@ -15,8 +15,7 @@ API for a pet shelter
 * Faker
 * Pry
 * markdown
-* Postgres
-* SQL
+* PostgreSQL
 
 
 ## Description:
