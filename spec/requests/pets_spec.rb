@@ -6,19 +6,6 @@ RSpec.describe 'pets', type: :request do
 
     get('list pets') do
       response(200, 'successful') do
-        produces 'application/json'
-        parameter name: :pet, in: :body, schema: {
-          type: :object,
-          properties: {
-            name: { type: :string },
-            animal_type: { type: :string },
-            breed: { type: :string },
-            adoption_status: { type: :string },
-            comments: { type: :string },
-            created_at: { type: :datetime },
-            updated_at: { type: :datatime },
-          },
-        }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -32,7 +19,8 @@ RSpec.describe 'pets', type: :request do
     end
 
     post('create pet') do
-      response(200, 'successful') do
+      response(201, 'successful') do
+        let(:pet) { { id: 1, name: "DMX", animal_type: "dog" } }
         consumes 'application/json'
         parameter name: :pet, in: :body, schema: {
           type: :object,
@@ -63,6 +51,7 @@ RSpec.describe 'pets', type: :request do
   path '/pets/random' do
     get('list a random pet from the database') do
       response(200, 'successful') do
+        let(:pet) { { id: "random", name: "DMX", animal_type: "dog" } }
         produces 'application/json'
         parameter name: :pet, in: :body, schema: {
           type: :object,
@@ -90,11 +79,16 @@ RSpec.describe 'pets', type: :request do
   end
 
   path '/pets/{id}' do
-    # You'll want to customize the parameter types...
+  
     parameter name: 'id', in: :path, type: :string, description: 'id'
-
+  
     get('show pet') do
+      Pet.destroy_all
+      pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
+
       response(200, 'successful') do
+        let(:id) { "1" }
+
         schema type: :object,
         properties: {
           id: { type: :integer, },
@@ -145,16 +139,16 @@ RSpec.describe 'pets', type: :request do
     # end
 
     put('update pet') do
+      Pet.destroy_all
+      pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
       response(200, 'successful') do
-        produces 'application/json'
+        let(:id) { '1' }
         consumes 'application/json'
         parameter name: :pet, in: :body, schema: {
-          type: :object,
           properties: {
             name: { type: :string },
             animal_type: { type: :string }
           },
-          required: ['id', 'name', 'animal_type']
         }
 
         after do |example|
@@ -165,12 +159,15 @@ RSpec.describe 'pets', type: :request do
           }
         end
         run_test!
+        let(:pet){ { :name => "DMX", :animal_type =>"dog" } }
       end
     end
 
     delete('delete pet') do
-      response(200, 'successful') do
-        let(:id) { '123' }
+      Pet.destroy_all
+      pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
+      response(202, 'successful') do
+        let(:id) { '1'}
 
         after do |example|
           example.metadata[:response][:content] = {
