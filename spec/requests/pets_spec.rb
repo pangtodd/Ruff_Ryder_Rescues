@@ -6,7 +6,6 @@ RSpec.describe 'pets', type: :request do
 
     get('list pets') do
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -143,6 +142,7 @@ RSpec.describe 'pets', type: :request do
       Pet.destroy_all
       pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
       response(200, 'successful') do
+        
         let(:id) { '1' }
         consumes 'application/json'
         parameter name: :pet, in: :body, schema: {
@@ -165,12 +165,13 @@ RSpec.describe 'pets', type: :request do
     end
 
     delete('delete pet') do
-      Pet.destroy_all
-      pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
+      # Pet.destroy_all
+      # pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
       response(202, 'successful') do
         let(:id) { '1'}
 
         after do |example|
+          
           example.metadata[:response][:content] = {
             'application/json' => {
               example: JSON.parse(response.body, symbolize_names: true)

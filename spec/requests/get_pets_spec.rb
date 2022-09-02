@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 describe "get all pets route", :type => :request do
+  Pet.destroy_all
   let!(:pets) {FactoryBot.create_list(:pet, 19)}
 
   before { get '/pets'}
 
   it 'returns all pets' do
     expect(JSON.parse(response.body).size). to be (20)
-    # this error is due to swagger, working on fixing.
+    # this error is due to Swagger, working on fixing.
   end
 
   it 'returns status code 200' do
