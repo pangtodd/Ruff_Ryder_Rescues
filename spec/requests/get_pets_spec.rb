@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 describe "get all pets route", :type => :request do
-  let!(:pets) { FactoryBot.create_list(:pet, 19)}
+  let!(:pets) {FactoryBot.create_list(:pet, 19)}
 
   before { get '/pets'}
 
   it 'returns all pets' do
-    expect(JSON.parse(response.body).size).to eq(20)
+    expect(JSON.parse(response.body).size). to be (20)
+    # this error is due to swagger, working on fixing.
   end
 
   it 'returns status code 200' do
@@ -17,8 +18,6 @@ describe "get all pets route", :type => :request do
     @id = JSON.parse(response.body).first["id"]
     get "/pets/#{@id}"
     expect(response).to have_http_status(:success)
-    # expect(JSON.parse(response.body).size).to eq(2)
-    # this= 8, all attributes of the JSON (although it is 1 JSON object, which is correct.)
 
   end
 

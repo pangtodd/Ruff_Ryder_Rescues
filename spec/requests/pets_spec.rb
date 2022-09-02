@@ -159,8 +159,8 @@ RSpec.describe 'pets', type: :request do
             }
           }
         end
-        run_test!
         let(:pet){ { :name => "DMX", :animal_type =>"dog" } }
+        run_test!
       end
     end
 
