@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory (:pet) do
+    
     name {Faker::Music::Hiphop.unique.artist}
     animal_type {"dog"}
     breed {Faker::Creature::Dog.breed}

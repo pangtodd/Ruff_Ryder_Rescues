@@ -8,7 +8,7 @@ describe "delete a pet route", :type => :request do
   end
 
   it "deletes the quote" do
-    expect(response).to have_http_status(202)
+    expect(response).to have_http_status(200)
     expect(JSON.parse(response.body)["message"]).to eq("entry successfully deleted.")
   end
 end

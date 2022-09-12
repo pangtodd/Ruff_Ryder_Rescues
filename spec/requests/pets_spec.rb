@@ -3,7 +3,6 @@ require 'swagger_helper'
 RSpec.describe 'pets', type: :request do
 
   path '/pets' do
-
     get('list pets') do
       response(200, 'successful') do
         after do |example|
@@ -81,7 +80,7 @@ RSpec.describe 'pets', type: :request do
     parameter name: 'id', in: :path, type: :string, description: 'id'
     get('show pet') do
       Pet.destroy_all
-      pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
+      pet = Pet.create!(:id=> 1, :name => 'DMX2', :animal_type => "dog")
 
       response(200, 'successful') do
         let(:id) { "1" }
@@ -101,14 +100,11 @@ RSpec.describe 'pets', type: :request do
             }
           }
         end
-        let(:pet) { {:name => "bobby", :animal_type=> "cat" } }
         run_test!
       end
     end
 
     patch('update some properties of a pet') do
-      Pet.destroy_all
-      pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
       response(200, 'successful') do
         let(:id) {'1'}
         consumes 'application/json'
@@ -139,10 +135,7 @@ RSpec.describe 'pets', type: :request do
     end
 
     put('update pet') do
-      Pet.destroy_all
-      pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
       response(200, 'successful') do
-        
         let(:id) { '1' }
         consumes 'application/json'
         parameter name: :pet, in: :body, schema: {
@@ -165,9 +158,7 @@ RSpec.describe 'pets', type: :request do
     end
 
     delete('delete pet') do
-      # Pet.destroy_all
-      # pet = Pet.create!(:id=> 1, :name => 'DMX', :animal_type => "dog")
-      response(202, 'successful') do
+      response(200, 'successful') do
         let(:id) { '1'}
 
         after do |example|

@@ -39,7 +39,7 @@ class PetsController < ApplicationController
   def destroy
     @pet = Pet.find(params[:id])
     if @pet.destroy!
-      render status:202, json: {
+      render status:200, json: {
         message: "entry successfully deleted."
       }
     end
