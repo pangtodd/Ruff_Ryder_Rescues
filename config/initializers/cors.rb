@@ -7,7 +7,15 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'localhost:*/'
+    origins 'http://localhost:3002'
+    # foxfire doesn't seem to want to take the "localhost:*", so added this "do"
+
+    resource '*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+  end
+  allow do
+    origins 'http://localhost:*'
 
     resource '*',
       headers: :any,
